@@ -1,7 +1,5 @@
 <template>
-    <div>
-        Detta är en about-sida
-    </div>
+    <div>Detta är en about-sida</div>
 </template>
 
 <script>
