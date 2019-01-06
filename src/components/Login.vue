@@ -1,15 +1,17 @@
 <template>
     <div>
+        <h1>Logga in</h1>
+
         <div>
             <form id="login-form" method="post" @submit.prevent="submitForm">
                 <div class="form-group">
                     <label>Epost</label>
-                    <input type="text" name="Email" id="email" v-model="email" />
+                    <input type="text" name="email" id="email" v-model="email" />
                 </div>
 
                 <div class="form-group">
                     <label>Lösenord</label>
-                    <input type="password" name="Password" id="password" v-model="password"/>
+                    <input type="password" name="password" id="password" v-model="password"/>
                 </div>
 
                 <div class="form-group">
@@ -40,6 +42,7 @@
 
 <script>
 import { ApiManager } from '../assets/service.js';
+import { EventBus } from '../assets/event-bus.js';
 
 export default {
     name: 'Login',
@@ -63,6 +66,7 @@ export default {
 
         signIn: function(userId) {
             localStorage.setItem('userId', userId);
+            EventBus.$emit('sign-in', true);
             this.$router.push('panel');
         },
 

@@ -1,13 +1,16 @@
+/* eslint-disable */ 
+
 export function ApiManager() {
     this.baseUrl = 'http://localhost:3000';
-    
+
     this.registerUser = function(email, password, callback) {
         let registerUrl = this.baseUrl + '/users';
         let obj = { 'email': email, 'password': password }; 
         let data = JSON.stringify(obj);
 
-        this.ajaxRequest(registerUrl, 'POST', data, function(error, response) {
-            callback(error);
+        this.ajaxRequest(registerUrl, 'POST', data, true, function(error, response) {
+            let obj = JSON.parse(response);
+            callback(error, obj);
         });
     };
 
@@ -16,7 +19,7 @@ export function ApiManager() {
         let obj = { 'email': email, 'password': password };
         let data = JSON.stringify(obj);
 
-        this.ajaxRequest(validateUrl, 'POST', data, function(error, response) {
+        this.ajaxRequest(validateUrl, 'POST', data, true, function(error, response) {
             var result = {
                 success: !error,
                 userId : ''
@@ -32,26 +35,50 @@ export function ApiManager() {
         });
     };
 
-	this.ajaxRequest = function(url, method, data, callback) {
+    this.getImagesByUser = function(userId, callback) {
+        let imagesUrl = this.baseUrl + '/images/user/' + userId + '/';
+
+        this.ajaxRequest(imagesUrl, 'GET', null, true, function(error, response) {
+            if (error) {
+                callback([]);
+            } else {
+                let obj = JSON.parse(response);
+                callback(obj);
+            }
+        });
+    };
+
+    this.uploadImage = function(blob, callback) {
+        let uploadUrl = this.baseUrl + '/images';
+
+        if (blob) {
+            this.ajaxRequest(uploadUrl, 'POST', blob, false, function(error, response) {
+                callback(!error);
+            });
+        }  
+    };
+
+	this.ajaxRequest = function(url, method, data, json, callback) {
 		let request = new XMLHttpRequest();
-
-		//Förhindra cachning
 		url += ('?d=' + new Date().getTime());
-
-		request.open(method, url, true);
-		request.setRequestHeader('Content-type','application/json; charset=utf-8');
-		request.setRequestHeader('Cache-Control', 'no-cache');
 
 		request.onreadystatechange = function() {
 			if (this.readyState == 4) {
-				if (this.status == 200) {
+				if (this.status >= 200 && this.status <= 299) {
 					callback(false, this.responseText);
 				} else {
                     callback(true, null);
 				}
 			}
 		}
-		
+        
+        request.open(method, url, true);
+
+        if (json) {
+            request.setRequestHeader('Content-type','application/json; charset=utf-8');
+            request.setRequestHeader('Cache-Control', 'no-cache');
+        }
+
 		request.send(data);
 	};
-};
+}

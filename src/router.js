@@ -5,6 +5,8 @@ import About from './components/About';
 import Login from './components/Login';
 import Register from './components/Register';
 import Panel from './components/Panel';
+import Upload from './components/Upload';
+import Edit from './components/Edit';
 
 Vue.use(Router);
 
@@ -14,6 +16,12 @@ export default new Router({
             path: '/',
             name: 'Main',
             component: Main
+        },
+
+        {
+            path: '/about',
+            name: 'About',
+            component: About
         },
 
         {
@@ -35,9 +43,17 @@ export default new Router({
         },
 
         {
-            path: '/about',
-            name: 'About',
-            component: About
+            path: '/upload',
+            name: 'Upload',
+            component: Upload
+        },
+
+        {
+            path: '/edit/:imageId',
+            name: 'Edit',
+            props: true,
+            component: Edit
         }
+
     ]
 });

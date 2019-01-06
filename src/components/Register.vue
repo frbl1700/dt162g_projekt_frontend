@@ -1,20 +1,22 @@
 <template>
     <div>
+        <h1>Registrera konto</h1>
+
         <div>
             <form id="register-form" method="post" @submit.prevent="submitForm">
                 <div class="form-group">
                     <label>Epost</label>
-                    <input type="text" name="Email" id="email" v-model="user.email" />
+                    <input type="text" name="email" id="email" v-model="user.email" />
                 </div>
 
                 <div class="form-group">
                     <label>Lösenord</label>
-                    <input type="password" name="Password" id="password" v-model="user.password" />
+                    <input type="password" name="password" id="password" v-model="user.password" />
                 </div>
 
                 <div class="form-group">
                     <label>Bekräfta lösenord</label>
-                    <input type="password" name="Password2" id="password2" v-model="user.password2" />
+                    <input type="password" name="password2" id="password2" v-model="user.password2" />
                 </div>
 
                 <div class="form-group">
@@ -26,7 +28,7 @@
         <div>
             <p v-if="errors.length">
                 <b>Var vänlig rätta till följande fel:</b>
-                <ul>
+                <ul class="error">
                     <li v-for="error in errors" :key="error.id">{{ error }}</li>
                 </ul>
             </p>
@@ -38,6 +40,7 @@
 /* eslint-disable */
 
 import { ApiManager } from '../assets/service.js';
+import { EventBus } from '../assets/event-bus.js';
 
 export default {
     name: 'Register',
@@ -58,6 +61,12 @@ export default {
     },
 
     methods: {
+        redirectToPanel: function(userId) {
+            localStorage.setItem('userId', userId);
+            EventBus.$emit('sign-in', true);
+            this.$router.push('panel');
+        },
+
         submitForm: function(e) {
             this.errors = [];
             var that = this;
@@ -86,9 +95,10 @@ export default {
             }
 
             if (success) {
-                this.apiManager.registerUser(this.user.email, this.user.password, function(error) {
+                this.apiManager.registerUser(this.user.email, this.user.password, function(error, result) {
                     if (!error) {
                         //User skapades
+                        that.redirectToPanel(result._id);
                     } else {
                         that.errors.push('E-postadressen är redan upptagen');
                     }

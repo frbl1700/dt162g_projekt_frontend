@@ -1,5 +1,7 @@
 <template>
-    <div>Detta är en about-sida</div>
+    <div>
+        <h1>Om </h1>
+    </div>
 </template>
 
 <script>
