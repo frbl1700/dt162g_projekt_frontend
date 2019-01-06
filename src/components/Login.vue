@@ -30,11 +30,7 @@
 
         <div>
             <p>
-                Inte medlem? 
-            </p>
-
-            <p> 
-                <a href="javascript:;" v-on:click="register">Registrera konto</a>
+                Inte medlem? <a href="javascript:;" v-on:click="register">Registrera konto</a>
             </p>
         </div>
     </div>
