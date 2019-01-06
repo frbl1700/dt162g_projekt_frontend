@@ -7,6 +7,8 @@ import Register from './components/Register';
 import Panel from './components/Panel';
 import Upload from './components/Upload';
 import Edit from './components/Edit';
+import Contact from './components/Contact';
+import Image from './components/Image';
 
 Vue.use(Router);
 
@@ -21,6 +23,11 @@ export default new Router({
             path: '/about',
             name: 'About',
             component: About
+        },
+        {
+            path: '/contact',
+            name: 'Contact',
+            component: Contact
         },
         {
             path: '/signin',
@@ -47,6 +54,12 @@ export default new Router({
             name: 'Edit',
             props: true,
             component: Edit
+        },
+        {
+            path: '/image/:imageId',
+            name: 'Image',
+            props: true,
+            component: Image
         }
     ]
 });

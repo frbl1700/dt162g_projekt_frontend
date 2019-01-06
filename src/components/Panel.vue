@@ -18,8 +18,9 @@
                     <div>
                         <router-link :to="{ name: 'Edit', params: { imageId: image._id  }}">Redigera bild</router-link>
                     </div>
-
-                    <img :src="image.url" :alt="image.info" :title="image.info" />
+                    <div>
+                        <img :src="image.url" :alt="image.info" :title="image.info" />
+                    </div>
                 </div>
             </div>
 
@@ -40,6 +41,10 @@ export default {
 
     created() {
         this.apiManager = new ApiManager();
+        
+        if (!this.$store.state.isSignedIn) {
+            this.$router.push('/');
+        }
     },
 
     mounted() {

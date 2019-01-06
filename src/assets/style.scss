@@ -35,6 +35,23 @@ hr {
     margin-top:2em;
 }
 
+.logo-container {
+    display: flex;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    align-items: flex-end;
+
+    .logo-image img {
+        max-width: 60px;
+        height: auto;
+    }
+
+    .logo-text {
+        margin-left: .5em;
+        font-size: 2em;
+    }
+}
+
 .container {
     max-width: 960px;
     margin-left: auto;
@@ -44,7 +61,16 @@ hr {
 .row {
     display: grid;
     grid-template-columns: auto auto;
- 
+}
+
+.image-container {
+    column-count: 4;
+    column-gap: 1em;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .menu-container {
@@ -67,14 +93,16 @@ hr {
     margin: 0;
 
     li {
-        background: #eee;
-        border: 1px solid #ccc;
-        flex-grow: 1;
+        margin-right: .5em;
 
         a {
             display: block;
-            text-decoration: none;
             text-align: center;
+            font-size: 1.2em;
+        }
+
+        a:hover {
+            color: #ccc;
         }
     }
 }
@@ -135,6 +163,6 @@ a.button {
 }
 
 .single-image {
-    max-height: 320px;
+    max-width: 320px;
     width: auto;
 }

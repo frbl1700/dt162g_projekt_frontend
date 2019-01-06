@@ -20,16 +20,32 @@
 		<div v-if="queryImages.length > 0">
 			<h2>Sökresultat</h2>
 
-			<div v-for="image in queryImages" :key="image._id">
-				<img :src="image.url" :alt="image.info" />
+			<div class="image-container">
+				<div v-for="image in queryImages" :key="image._id">
+					<router-link :to="{ name: 'Image', params: { imageId: image._id  }}">
+						<img :src="image.url" :alt="image.info" />
+					</router-link>
+				</div>
 			</div>
+
+			<hr />
+		</div>
+
+		<div v-else-if="showNoImagesInfo">
+			<p>
+				Inget sökresultat ..
+			</p>
 		</div>
 
 		<div>
 			<h2>Senaste bilderna</h2>
 
-			<div v-for="image in allImages" :key="image._id">
-				<img :src="image.url" :alt="image.info" />
+			<div class="image-container">
+				<div v-for="image in allImages" :key="image._id">
+					<router-link :to="{ name: 'Image', params: { imageId: image._id  }}">
+						<img :src="image.url" :alt="image.info" />
+					</router-link>
+				</div>
 			</div>
 
 			<div v-if="allImages.length == 0">
@@ -49,7 +65,8 @@ export default {
 		return {
 			allImages: [],
 			queryImages: [],
-			query: ''
+			query: '',
+			showNoImagesInfo: false
 		}
 	},
 
@@ -79,6 +96,12 @@ export default {
 				this.apiManager.getImagesByQuery(that.query, function(error, result) {
 					if (!error) {
 						that.queryImages = result;
+
+						if (result.length == 0) {
+							that.showNoImagesInfo = true;
+						} else {
+							that.showNoImagesInfo = false;
+						}
 					}
 				});
 			}

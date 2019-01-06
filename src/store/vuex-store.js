@@ -11,27 +11,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store ({
     strict: true,
-
     plugins: [vuexPersist.plugin],
-
     state: {
         userId: '',
         isSignedIn: false
     },
-
     mutations: {
         setUser(state, userId) {
             state.userId = userId;
             state.isSignedIn = true;
-
-            //console.log('sparade state', userId);
         },
         unsetUser(state) {
             state.userId = '';
             state.isSignedIn = false;
         }
     },
-
     actions: {
         setUser({commit}, userId) {
             commit('setUser', userId);

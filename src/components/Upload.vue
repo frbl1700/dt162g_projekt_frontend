@@ -43,6 +43,10 @@ export default {
 
     created() {
         this.apiManager = new ApiManager();
+        
+        if (!this.$store.state.isSignedIn) {
+            this.$router.push('/');
+        }
     },
 
     methods: {

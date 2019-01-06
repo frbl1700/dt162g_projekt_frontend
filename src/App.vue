@@ -2,10 +2,8 @@
 	<div id="app">
 		<div class="container">
 			<page-header />
-
-			<div>
-				<router-view />
-			</div>
+			<hr />
+			<router-view />
 		</div>
 	</div>
 </template>
