@@ -41,17 +41,17 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { ApiManager } from '../assets/service.js';
-import { EventBus } from '../assets/event-bus.js';
 
 export default {
     name: 'Login',
 
-    created: function() {
+    created() {
         this.apiManager = new ApiManager();
     },
 
-    data: function() {
+    data() {
         return {
             errors : [],
             email: '',
@@ -60,17 +60,16 @@ export default {
     },
     
     methods: {
-        register: function(e) {
+        register() {
             this.$router.push('register');
         },
 
-        signIn: function(userId) {
-            localStorage.setItem('userId', userId);
-            EventBus.$emit('sign-in', true);
+        signIn(userId) {
+            this.$store.dispatch('setUser', userId);
             this.$router.push('panel');
         },
 
-        submitForm: function(e) {
+        submitForm(e) {
             this.errors = [];
             var that = this;
 

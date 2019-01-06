@@ -38,18 +38,16 @@
 
 <script>
 /* eslint-disable */
-
 import { ApiManager } from '../assets/service.js';
-import { EventBus } from '../assets/event-bus.js';
 
 export default {
     name: 'Register',
 
-    created: function() {
+    created() {
         this.apiManager = new ApiManager();
     },
 
-    data: function() {
+    data() {
         return {
             errors: [],
             user: {
@@ -59,15 +57,15 @@ export default {
             }
         }
     },
+    
 
     methods: {
-        redirectToPanel: function(userId) {
-            localStorage.setItem('userId', userId);
-            EventBus.$emit('sign-in', true);
+        redirectToPanel(userId) {
+            this.$store.dispatch('setUser', userId);
             this.$router.push('panel');
         },
 
-        submitForm: function(e) {
+        submitForm(e) {
             this.errors = [];
             var that = this;
             var success = true;
@@ -108,7 +106,7 @@ export default {
             e.preventDefault();
         },
 
-        validEmail: function (email) {
+        validEmail(email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
             return re.test(email);

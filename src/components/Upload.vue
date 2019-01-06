@@ -1,6 +1,14 @@
 <template>
     <div>
-        <h3>Ladda upp ny bild</h3>
+        <div>
+            <h1>Ladda upp ny bild</h1>
+            
+            <p>
+                <router-link to="/panel">Tillbaka</router-link>
+            </p>
+        </div>
+
+        <hr />
 
         <div>
             <form method="post" enctype="multipart/form-data" @submit.prevent="submitForm">
@@ -33,32 +41,30 @@ import { ApiManager } from '../assets/service.js';
 export default {
     name: 'Upload',
 
-    created: function() {
-        this.userId = localStorage.getItem('userId');
+    created() {
         this.apiManager = new ApiManager();
-
-        if (!this.userId) {
-            this.$router.push('signin');
-            return;
-        }
     },
 
     methods: {
-        submitForm: function(e) {
+        submitForm(e) {
             let form = e.target;
-            let formData = new FormData(form);
             let that = this;
 
-            /* Lägg på userid */
-            formData.append('user', this.userId);
+            if (form.file.value) {
+                /* Bygg form-data för JSON */
+                let formData = new FormData(form);
 
-            /* Ladda upp bild */
-            this.apiManager.uploadImage(formData, function(success) {
-                if (success) {
-                    form.reset();
-                    that.$router.push('panel');
-                }
-            });
+                /* Lägg på userid */
+                formData.append('user', this.$store.state.userId);
+
+                /* Ladda upp bild */
+                this.apiManager.uploadImage(formData, function(success) {
+                    if (success) {
+                        form.reset();
+                        that.$router.push('panel');
+                    }
+                });
+            }
 
             e.preventDefault();
         }

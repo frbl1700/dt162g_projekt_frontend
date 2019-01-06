@@ -28,10 +28,23 @@ ul.error li {
     color: red;
 }
 
+hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin-top:2em;
+}
+
 .container {
     max-width: 960px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: auto auto;
+ 
 }
 
 .menu-container {
@@ -79,19 +92,27 @@ ul.error li {
         border: 1px solid #eee;
     }
 
+    input[type=file] {
+        border: none;
+    }
+
     input {
         padding-top: 1em;
         padding-bottom: 1em;
     }
+}
 
-    button {
-        border: 0;
-        border: 1px solid #eee;
-        background: rgb(85, 135, 125);
-        color: #fafafa;
-        padding-top: 1em;
-        padding-bottom: 1em;
-    }
+button, .button {
+    border: 0;
+    border: 1px solid #eee;
+    background: rgb(85, 135, 125);
+    color: #fafafa;
+    padding: 1em;
+
+}
+
+a.button {
+    text-decoration: none;
 }
 
 .images {
@@ -111,4 +132,9 @@ ul.error li {
             max-height: 100px;
         }
     }
+}
+
+.single-image {
+    max-height: 320px;
+    width: auto;
 }

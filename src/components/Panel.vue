@@ -4,21 +4,29 @@
 
         <div>
             <p>
-                <router-link to="/upload">Ladda upp ny bild</router-link>
+                <router-link to="/upload" class="button">Ladda upp ny bild</router-link>
             </p>
         </div>
+
+        <hr />
 
         <div>   
             <h3>Dina bilder</h3>
 
             <div class="images">
-                <div v-for="image in images" :key="image.id">
+                <div v-for="image in images" :key="image._id">
                     <div>
                         <router-link :to="{ name: 'Edit', params: { imageId: image._id  }}">Redigera bild</router-link>
                     </div>
 
                     <img :src="image.url" :alt="image.info" :title="image.info" />
                 </div>
+            </div>
+
+            <div>
+                <p v-if="images.length == 0">
+                    <em>Bilder saknas</em>
+                </p>
             </div>
         </div>
     </div>
@@ -30,32 +38,26 @@ import { ApiManager } from '../assets/service.js';
 export default {
     name: 'Panel',
 
-    created: function() {
-        this.userId = localStorage.getItem('userId');
+    created() {
         this.apiManager = new ApiManager();
-
-        if (!this.userId) {
-            this.$router.push('signin');
-            return;
-        }
     },
 
-    mounted: function() {
+    mounted() {
         this.loadImages();
     },
 
-    data: function() {
+    data() {
         return {
             images: []
         }
     },
 
     methods: {
-        loadImages: function() {
+        loadImages() {
             this.images = [];
             let that = this;
 
-            this.apiManager.getImagesByUser(this.userId, function(data) {
+            this.apiManager.getImagesByUser(this.$store.state.userId, function(data) {
                 if (data && data.length > 0) {
                     that.images = data;
                 }

@@ -7,7 +7,11 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vuex": "^3.0.1",
+    "vuex-persist": "^2.0.0",
+    "vuex-router-sync": "^5.0.0"
+  },
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-sass": "^4.0.2",
