@@ -4,15 +4,26 @@
 
         <div>
             <div>
-                <span>{{image.name}}</span>
-            </div>
-
-            <div>
                 <img :src="image.url" :alt="image.info" class="single-image" />
             </div>
 
             <div>
-                <span>{{image.info}}</span>
+                <table>
+                    <tr>
+                        <td>Namn:</td>
+                        <td>{{image.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Info:</td>
+                        <td>{{image.info}}</td>
+                    </tr>
+                    <tr>
+                        <td>URL:</td>
+                        <td>
+                            <a :href="image.url">{{image.url}}</a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

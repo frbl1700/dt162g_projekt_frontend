@@ -2,7 +2,9 @@
     <div>
         <div class="logo-container">
             <div class="logo-image">
-                <img src="../assets/logo.png" alt="Logo" />
+                <router-link to="/">
+                    <img src="../assets/logo.png" alt="Logo" />
+                </router-link>
             </div>
 
             <div class="logo-text">bildbanken.com</div>
@@ -29,6 +31,10 @@
                                 <a href="#" v-on:click="signOut">Logga ut</a>
                             </li>
 
+                            <li v-if="!$store.state.isSignedIn">
+                                <router-link to="/register">Registrera konto</router-link>
+                            </li>
+                            
                             <li v-if="!$store.state.isSignedIn">
                                 <router-link to="/signin">Logga in</router-link>
                             </li>
