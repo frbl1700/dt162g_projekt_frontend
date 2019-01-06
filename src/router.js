@@ -17,43 +17,36 @@ export default new Router({
             name: 'Main',
             component: Main
         },
-
         {
             path: '/about',
             name: 'About',
             component: About
         },
-
         {
             path: '/signin',
             name: 'Login',
             component: Login
         },
-
         {
             path: '/register',
             name: 'Register',
             component: Register
         },
-
         {
             path: '/panel',
             name: 'Panel',
             component: Panel
         },
-
         {
             path: '/upload',
             name: 'Upload',
             component: Upload
         },
-
         {
             path: '/edit/:imageId',
             name: 'Edit',
             props: true,
             component: Edit
         }
-
     ]
 });
