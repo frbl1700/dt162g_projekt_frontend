@@ -73,20 +73,22 @@ export default {
             this.errors = [];
             var that = this;
 
-            this.apiManager.validateUser(this.email, this.password, function(result) {
-                if (result.success && result.userId) {
+            if (this.email && this.password) {
+                this.apiManager.validateUser(this.email, this.password, function(result) {
+                    if (result.success && result.userId) {
 
-                    /*
-                     *  Anv + lösen korrekt
-                     *  Logga in användaren och redirecta
-                     */
+                        /*
+                        *  Anv + lösen korrekt
+                        *  Logga in användaren och redirecta
+                        */
 
-                    that.signIn(result.userId);
-                } else {
-                    that.errors.push('Felaktigt användarnamn eller lösenord');
-                }
-            });
-            
+                        that.signIn(result.userId);
+                    } else {
+                        that.errors.push('Felaktigt användarnamn eller lösenord');
+                    }
+                });
+            }
+
             e.preventDefault();
         }
     }
