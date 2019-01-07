@@ -4,8 +4,6 @@
 
         <p> 
             <strong>bildbanken.com</strong> är en databas för bilder och foton.
-            
-
         </p>
     </div>
 </template>

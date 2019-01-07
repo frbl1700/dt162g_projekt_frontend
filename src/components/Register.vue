@@ -38,7 +38,7 @@
 
 <script>
 /* eslint-disable */
-import { ApiManager } from '../assets/service.js';
+import { ApiManager } from '@/service/api.js';
 
 export default {
     name: 'Register',

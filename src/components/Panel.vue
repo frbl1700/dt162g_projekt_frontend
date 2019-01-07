@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { ApiManager } from '../assets/service.js';
+import { ApiManager } from '@/service/api.js';
 
 export default {
     name: 'Panel',
