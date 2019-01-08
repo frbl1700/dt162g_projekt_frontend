@@ -105,7 +105,7 @@ a.button {
 .images {
   display: grid;
   column-gap: 2em;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
   grid-column-gap: 30px;
   grid-row-gap: 30px; }
@@ -119,3 +119,9 @@ a.button {
 .single-image {
   max-width: 320px;
   width: auto; }
+
+@media screen and (max-width: 720px) {
+  .images {
+    display: block; }
+    .images > div {
+      margin-bottom: 1em; } }

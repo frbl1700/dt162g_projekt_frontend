@@ -1,7 +1,7 @@
 /* eslint-disable */ 
 
 export function ApiManager() {
-    this.baseUrl = 'http://localhost:3000';
+    this.baseUrl = 'http://superburken.se:3000';
 
     this.registerUser = function(email, password, callback) {
         let registerUrl = this.baseUrl + '/users';
