@@ -121,7 +121,7 @@ a.button {
   width: auto; }
 
 @media screen and (max-width: 720px) {
-  .images {
+  .images, .row {
     display: block; }
-    .images > div {
+    .images > div, .row > div {
       margin-bottom: 1em; } }

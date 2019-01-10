@@ -168,7 +168,7 @@ a.button {
 }
 
 @media screen and (max-width: 720px) {
-    .images {
+    .images, .row {
         display: block;
         
         > div {
